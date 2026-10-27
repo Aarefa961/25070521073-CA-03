@@ -1,7 +1,7 @@
 import React from 'react';import { useCallback, useEffect, useMemo, useState } from 'react';
 import { BookOpen, CalendarDays, Check, CheckCircle2, ChevronDown, CircleAlert, Clock3, Filter, GraduationCap, LayoutDashboard, ListTodo, LoaderCircle, Plus, Search, Trash2, X } from 'lucide-react';
 
-const API = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/$/, '');
+const API = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000/api' : '/api')).replace(/\/$/, '');
 const blankForm = { title: '', subject: '', type: 'Assignment', dueDate: '', priority: 'Medium', notes: '' };
 const todayISO = () => new Date().toISOString().slice(0, 10);
 const prettyDate = (value) => value ? new Date(`${String(value).slice(0, 10)}T12:00:00`).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'No date';

@@ -71,6 +71,59 @@ Each task document contains:
 - `notes` (optional string)
 - `createdAt`, `updatedAt` (timestamps)
 
+## Deployment Guide
+
+### Option 1: Unified Full-Stack Deployment on Render (Recommended & Free)
+Deploy the frontend and backend together on a single Render Web Service:
+
+1. **Push your code to GitHub** (if not already pushed).
+2. Go to [Render.com](https://render.com) and create an account.
+3. Click **New +** -> **Web Service**.
+4. Connect your GitHub repository (`flexi-project`).
+5. Configure the service:
+   - **Name**: `flexi-academic-organizer`
+   - **Environment**: `Node`
+   - **Build Command**: `npm run build`
+   - **Start Command**: `npm start`
+   - **Instance Type**: `Free`
+6. Add the following **Environment Variables**:
+   - `NODE_ENV` = `production`
+   - `PORT` = `5000`
+   - `MONGODB_URI` = your MongoDB Atlas connection string (e.g. `mongodb+srv://username:password@cluster.mongodb.net/flexi?retryWrites=true&w=majority`)
+7. Click **Deploy Web Service**.
+   Render will build the React frontend and serve it with the Express API under a single HTTPS URL with zero CORS issues!
+
+---
+
+### Option 2: Split Deployment (Frontend on Vercel + Backend on Render)
+
+#### Backend (Render):
+1. Create a **New Web Service** on Render.
+2. Root Directory: `backend`
+3. Build Command: `npm install`
+4. Start Command: `node server.js`
+5. Environment Variables:
+   - `MONGODB_URI` = your Atlas connection string
+   - `FRONTEND_ORIGIN` = `https://your-app.vercel.app`
+
+#### Frontend (Vercel):
+1. Go to [Vercel.com](https://vercel.com) and import the repository.
+2. Set Root Directory to `frontend`.
+3. Add Environment Variable:
+   - `VITE_API_URL` = `https://your-backend.onrender.com/api`
+4. Click **Deploy**.
+
+---
+
+### MongoDB Atlas Setup Checklist
+When configuring your database in MongoDB Atlas:
+1. Under **Network Access**, add IP `0.0.0.0/0` (Allow access from anywhere) so cloud servers can connect.
+2. In your connection string, make sure you **remove the `<` and `>` brackets** around your username and password:
+   - ❌ `mongodb+srv://<user>:<pass>@...`
+   - ✅ `mongodb+srv://user:pass@...`
+
+---
+
 ## Troubleshooting
 - `ECONNREFUSED` / database connection error: start MongoDB Community Server or use a valid Atlas URI.
 - CORS/network error: ensure backend is running on port 5000.
