@@ -1,21 +1,21 @@
 FROM node:20-alpine AS build
 
 WORKDIR /app
-COPY frontend/package*.json ./frontend/
-RUN cd frontend && npm install
-COPY frontend ./frontend
-RUN cd frontend && npm run build
+COPY client/package*.json ./client/
+RUN cd client && npm install
+COPY client ./client
+RUN cd client && npm run build
 
 FROM node:20-alpine
 
 WORKDIR /app
-COPY backend/package*.json ./backend/
-RUN cd backend && npm install --omit=dev
-COPY backend ./backend
-COPY --from=build /app/frontend/dist ./frontend/dist
+COPY server/package*.json ./server/
+RUN cd server && npm install --omit=dev
+COPY server ./server
+COPY --from=build /app/client/dist ./client/dist
 
 ENV NODE_ENV=production
 ENV PORT=5000
 EXPOSE 5000
 
-CMD ["node", "backend/server.js"]
+CMD ["node", "server/server.js"]
