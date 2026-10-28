@@ -27,7 +27,7 @@ export function authMiddleware(req, res, next) {
 // Student registration / signup
 router.post('/register', async (req, res, next) => {
   try {
-    const { name, email, password, prn = '', department = 'Computer Science & Engineering', semester = '5th Semester', status = 'Student' } = req.body;
+    const { name, age = 20, email, password, prn = '', department = 'Computer Science & Engineering', semester = '5th Semester', status = 'Student' } = req.body;
 
     if (!name?.trim() || !email?.trim() || !password) {
       return res.status(400).json({ message: 'Name, email, and password are required.' });
@@ -47,13 +47,21 @@ router.post('/register', async (req, res, next) => {
       name: name.trim(),
       email: email.trim().toLowerCase(),
       password: hashedPassword,
+      age: Number(age) || 20,
       prn: prn.trim(),
       department: department.trim(),
       semester: semester.trim(),
       status,
     });
 
-    const payload = { id: user._id, email: user.email, name: user.name, status: user.status };
+    const payload = {
+      id: user._id,
+      email: user.email,
+      name: user.name,
+      subject: user.name, // Matching professor's payload: subject
+      role: user.status,   // Matching professor's payload: role
+      status: user.status,
+    };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' });
 
     res.status(201).json({
@@ -95,7 +103,14 @@ router.post('/login', async (req, res, next) => {
       return res.status(401).json({ message: 'Invalid password. Please check your credentials.' });
     }
 
-    const payload = { id: user._id, email: user.email, name: user.name, status: user.status };
+    const payload = {
+      id: user._id,
+      email: user.email,
+      name: user.name,
+      subject: user.name, // Matching professor's payload: subject
+      role: user.status,   // Matching professor's payload: role
+      status: user.status,
+    };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' });
 
     res.json({
@@ -133,3 +148,4 @@ router.get('/me', authMiddleware, async (req, res, next) => {
 });
 
 export default router;
+

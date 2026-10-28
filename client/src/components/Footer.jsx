@@ -29,10 +29,14 @@ export default function Footer() {
             <ul className="footer-links">
               <li><Link to="/dashboard">Student Dashboard</Link></li>
               <li><Link to="/tasks">Assignment Manager</Link></li>
+              <li><Link to="/attendance">Attendance Forecaster</Link></li>
               <li><Link to="/timetable">Weekly Timetable</Link></li>
-              <li><Link to="/gpa-calculator">SGPA & CGPA Calculator</Link></li>
+              <li><Link to="/gpa-calculator">SGPA & CGPA Calc</Link></li>
+              <li><Link to="/faculty">Faculty Directory</Link></li>
+              <li><Link to="/syllabus">Course Syllabus & Qs</Link></li>
+              <li><Link to="/exam-schedule">Exam Timetable</Link></li>
               <li><Link to="/notes">Study Notes Hub</Link></li>
-              <li><Link to="/analytics">Performance Analytics</Link></li>
+              <li><Link to="/analytics">Analytics & Trends</Link></li>
             </ul>
           </div>
 
@@ -40,9 +44,10 @@ export default function Footer() {
           <div className="footer-col">
             <h4 className="footer-heading">Project Submission</h4>
             <ul className="footer-info-list">
-              <li><strong>Student Name:</strong> Aarefa</li>
+              <li><strong>Student Name:</strong> AAREFA AADIL</li>
               <li><strong>PRN / Roll No:</strong> 25070521073</li>
-              <li><strong>Course:</strong> Web Technologies / Full-Stack</li>
+              <li><strong>Batch / Class:</strong> Section B (sitSecB)</li>
+              <li><strong>Course:</strong> Web Technologies (WT)</li>
               <li><strong>Evaluation:</strong> Continuous Assessment 03</li>
               <li><strong>Faculty Guide:</strong> Prof. Somesh Chutel</li>
             </ul>

@@ -8,7 +8,9 @@ const userSchema = new mongoose.Schema({
   department: { type: String, trim: true, default: 'Computer Science & Engineering' },
   semester: { type: String, trim: true, default: '5th Semester' },
   status: { type: String, default: 'Student' },
+  age: { type: Number, default: 20 },
   avatar: { type: String, default: '🎓' },
 }, { timestamps: true });
 
 export default mongoose.model('User', userSchema);
+

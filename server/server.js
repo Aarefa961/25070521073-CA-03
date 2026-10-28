@@ -21,7 +21,7 @@ dotenv.config();
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 const PORT = process.env.PORT || 5000;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/sitSecB';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/flexi';
 
 const app = express();
 
@@ -63,77 +63,101 @@ app.post('/login', async (req, res, next) => {
   return authRouter(req, res, next);
 });
 
-app.get('/getall', async (_req, res, next) => {
-  try {
-    const tasks = await Task.find().sort({ createdAt: -1 });
-    res.json(tasks);
-  } catch (err) {
-    next(err);
-  }
-});
-
-app.get('/get/:id', async (req, res, next) => {
-  try {
-    const task = await Task.findById(req.params.id);
-    if (!task) return res.status(404).json({ msg: 'Not Found' });
-    res.json(task);
-  } catch (err) {
-    next(err);
-  }
-});
-
-app.put('/update/:id', async (req, res, next) => {
-  try {
-    const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!task) return res.status(404).json({ msg: 'Not Found' });
-    res.json(task);
-  } catch (err) {
-    next(err);
-  }
-});
-
-app.delete('/delete/:id', async (req, res, next) => {
-  try {
-    const task = await Task.findByIdAndDelete(req.params.id);
-    if (!task) return res.status(404).json({ msg: 'Not Found' });
-    res.json({ msg: 'Deleted successfully', task });
-  } catch (err) {
-    next(err);
-  }
-});
-
-// Serve compiled client in production if dist exists
-if (fs.existsSync(distPath)) {
-  app.use(express.static(distPath));
-  app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api') || req.path.startsWith('/getall') || req.path === '/login' || req.path === '/create') {
-      return next();
+  app.get('/getall', async (req, res, next) => {
+    try {
+      if (req.query.type === 'student' || req.query.collection === 'student') {
+        const students = await User.find().select('-password').sort({ createdAt: -1 });
+        return res.json(students);
+      }
+      const tasks = await Task.find().sort({ createdAt: -1 });
+      if (tasks.length === 0) {
+        const students = await User.find().select('-password').sort({ createdAt: -1 });
+        return res.json(students);
+      }
+      res.json(tasks);
+    } catch (err) {
+      next(err);
     }
-    res.sendFile(path.join(distPath, 'index.html'));
   });
-}
 
-// 404 handler
-app.use('/api/*', (req, res) => res.status(404).json({ message: `API route not found: ${req.method} ${req.path}` }));
-app.use((req, res) => res.status(404).json({ message: `Route not found: ${req.method} ${req.path}` }));
-
-// Error handler
-app.use((err, _req, res, _next) => {
-  console.error(err);
-  res.status(500).json({ message: 'Internal server error.', error: err.message });
-});
-
-// Start listening
-app.listen(PORT, () => {
-  console.log(`FLEXI Academic Organizer server running at http://localhost:${PORT}`);
-});
-
-// Connect to MongoDB
-mongoose.connect(MONGODB_URI)
-  .then(() => {
-    console.log('Connected to MongoDB database:', mongoose.connection.name);
-  })
-  .catch((err) => {
-    console.error('MongoDB connection error:', err.message);
-    console.log('Note: Running with database offline. Whitelist 0.0.0.0/0 on MongoDB Atlas to persist.');
+  app.get('/get/:id', async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const student = await User.findById(id).select('-password');
+      if (student) return res.json(student);
+      const task = await Task.findById(id);
+      if (task) return res.json(task);
+      res.status(404).json({ msg: 'Student Id Invalid' });
+    } catch (err) {
+      next(err);
+    }
   });
+
+  app.put('/update/:id', async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const student = await User.findById(id);
+      if (student) {
+        const { status } = req.body;
+        if (status) student.status = status;
+        await student.save();
+        return res.json({ acknowledged: true, modifiedCount: 1, student });
+      }
+      const task = await Task.findByIdAndUpdate(id, req.body, { new: true });
+      if (task) return res.json(task);
+      res.status(404).json({ msg: 'Student Id Invalid' });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  app.delete('/delete/:id', async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const student = await User.findByIdAndDelete(id);
+      if (student) return res.json({ acknowledged: true, deletedCount: 1, student });
+      const task = await Task.findByIdAndDelete(id);
+      if (task) return res.json({ acknowledged: true, deletedCount: 1, task });
+      res.status(404).json({ msg: 'Student Id Invalid' });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  // Serve compiled client in production if dist exists
+  if (fs.existsSync(distPath)) {
+    app.use(express.static(distPath));
+    app.get('*', (req, res, next) => {
+      if (req.path.startsWith('/api') || req.path.startsWith('/getall') || req.path === '/login' || req.path === '/create') {
+        return next();
+      }
+      res.sendFile(path.join(distPath, 'index.html'));
+    });
+  }
+
+  // 404 handler
+  app.use('/api/*', (req, res) => res.status(404).json({ message: `API route not found: ${req.method} ${req.path}` }));
+  app.use((req, res) => res.status(404).json({ message: `Route not found: ${req.method} ${req.path}` }));
+
+  // Error handler
+  app.use((err, _req, res, _next) => {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error.', error: err.message });
+  });
+
+  // Start listening
+  app.listen(PORT, () => {
+    console.log(`FLEXI Academic Organizer server running at http://localhost:${PORT}`);
+  });
+
+  // Connect to MongoDB (Community Server / Compass)
+  mongoose.connect(MONGODB_URI)
+    .then(() => {
+      console.log('Connected to MongoDB database:', mongoose.connection.name);
+      console.log(`Connection endpoint: ${MONGODB_URI.includes('@') ? MONGODB_URI.replace(/\/\/.*@/, '//***@') : MONGODB_URI}`);
+    })
+    .catch((err) => {
+      console.error('MongoDB connection error:', err.message);
+      console.log('Note: Make sure MongoDB Community Server is installed and running locally on port 27017.');
+      console.log('In MongoDB Compass, connect to: mongodb://127.0.0.1:27017');
+    });

@@ -27,7 +27,7 @@ export default function Contact() {
     },
     {
       q: 'Can the professor evaluate the application in 1-click?',
-      a: 'Yes, click the "⚡ 1-Click Demo" button on the Navbar or Login page. It automatically logs in with the preloaded student profile (Aarefa, PRN: 25070521073).',
+      a: 'Yes, click the "⚡ 1-Click Demo" button on the Navbar or Login page. It automatically logs in with the preloaded student profile (AAREFA AADIL, PRN: 25070521073).',
     },
     {
       q: 'How does the SGPA / CGPA calculator calculate scores?',
@@ -135,10 +135,40 @@ export default function Contact() {
           )}
         </div>
 
-        {/* Right Column: Faculty & Campus Details */}
+        {/* Right Column: Student Developer & Faculty & Campus Details */}
         <div className="contact-side-col">
-          {/* Faculty Consultation */}
+          {/* Student Developer Info Card */}
           <div className="dashboard-panel">
+            <h3 className="panel-title mb-3">Project Lead & Developer Details</h3>
+            <div className="faculty-info-box" style={{ borderColor: 'rgba(99, 102, 241, 0.4)', background: 'linear-gradient(145deg, rgba(99, 102, 241, 0.08), rgba(17, 24, 39, 0.6))' }}>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xl">🎓</span>
+                <strong className="faculty-name text-indigo" style={{ fontSize: '1.15rem' }}>AAREFA AADIL</strong>
+              </div>
+              <span className="faculty-role">Student Developer • Continuous Assessment CA-03</span>
+              <div className="faculty-meta-list mt-2">
+                <div className="meta-row">
+                  <span className="text-indigo font-mono font-bold">PRN:</span>
+                  <span className="font-mono text-main font-semibold">25070521073</span>
+                </div>
+                <div className="meta-row">
+                  <MapPin size={16} className="text-emerald" />
+                  <span>Symbiosis Institute of Technology (SIT), Pune</span>
+                </div>
+                <div className="meta-row">
+                  <Clock size={16} className="text-cyan" />
+                  <span>B.Tech CSE • 5th Semester • Section B (sitSecB)</span>
+                </div>
+                <div className="meta-row">
+                  <Mail size={16} className="text-amber" />
+                  <span>aarefa.aadil@sitpune.edu.in</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Faculty Consultation */}
+          <div className="dashboard-panel mt-4">
             <h3 className="panel-title mb-3">Faculty Guide Consultation</h3>
             <div className="faculty-info-box">
               <strong className="faculty-name">Prof. Somesh Chutel</strong>

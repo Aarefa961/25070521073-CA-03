@@ -83,8 +83,8 @@ export function AuthProvider({ children }) {
   const loginDemo = async () => {
     const demoUser = {
       id: 'demo-student-id-sit',
-      name: 'Aarefa (Demo Student)',
-      email: 'aarefa.student@sit.edu',
+      name: 'AAREFA AADIL',
+      email: 'aarefa.aadil@sitpune.edu.in',
       prn: '25070521073',
       department: 'Computer Science & Engineering',
       semester: '5th Semester',
@@ -95,7 +95,7 @@ export function AuthProvider({ children }) {
     
     // Attempt backend login first, fallback to offline demo session if backend/DB is offline
     try {
-      return await login('aarefa.student@sit.edu', 'password123');
+      return await login('aarefa.aadil@sitpune.edu.in', 'password123');
     } catch (err) {
       setToken(demoToken);
       setUser(demoUser);

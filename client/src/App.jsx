@@ -16,6 +16,11 @@ import Analytics from './pages/Analytics';
 import Profile from './pages/Profile';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Services from './pages/Services';
+import Attendance from './pages/Attendance';
+import Faculty from './pages/Faculty';
+import Syllabus from './pages/Syllabus';
+import ExamSchedule from './pages/ExamSchedule';
 
 export default function App() {
   return (
@@ -23,12 +28,13 @@ export default function App() {
       <Navbar />
       <main className="app-main-content">
         <Routes>
-          {/* Public Routes */}
+          {/* Public Academic Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/services" element={<Services />} />
 
           {/* Protected Student Academic Modules */}
           <Route
@@ -64,6 +70,14 @@ export default function App() {
             }
           />
           <Route
+            path="/attendance"
+            element={
+              <ProtectedRoute>
+                <Attendance />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/notes"
             element={
               <ProtectedRoute>
@@ -76,6 +90,30 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <Analytics />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/faculty"
+            element={
+              <ProtectedRoute>
+                <Faculty />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/syllabus"
+            element={
+              <ProtectedRoute>
+                <Syllabus />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/exam-schedule"
+            element={
+              <ProtectedRoute>
+                <ExamSchedule />
               </ProtectedRoute>
             }
           />

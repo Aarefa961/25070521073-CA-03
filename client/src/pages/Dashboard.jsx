@@ -16,6 +16,9 @@ import {
   Award,
   Layers,
   ChevronRight,
+  CalendarCheck,
+  Users,
+  FileText,
 } from 'lucide-react';
 
 export default function Dashboard() {
@@ -244,11 +247,27 @@ export default function Dashboard() {
           <div className="dashboard-panel mt-4">
             <h3 className="panel-title mb-3">Academic Tool Hub</h3>
             <div className="quick-tools-grid">
+              <Link to="/attendance" className="quick-tool-card">
+                <div className="tool-icon icon-emerald"><CalendarCheck size={20} /></div>
+                <div>
+                  <strong>Attendance</strong>
+                  <p>75% bunk forecaster</p>
+                </div>
+              </Link>
+
+              <Link to="/exam-schedule" className="quick-tool-card">
+                <div className="tool-icon icon-indigo"><Clock size={20} /></div>
+                <div>
+                  <strong>Exam Schedule</strong>
+                  <p>CA-03 evaluation dates</p>
+                </div>
+              </Link>
+
               <Link to="/gpa-calculator" className="quick-tool-card">
                 <div className="tool-icon icon-amber"><Calculator size={20} /></div>
                 <div>
                   <strong>GPA Calculator</strong>
-                  <p>Calculate current SGPA/CGPA</p>
+                  <p>SGPA & CGPA predictor</p>
                 </div>
               </Link>
 
@@ -256,23 +275,23 @@ export default function Dashboard() {
                 <div className="tool-icon icon-purple"><BookOpen size={20} /></div>
                 <div>
                   <strong>Study Notes</strong>
-                  <p>Access formula & lab sheets</p>
+                  <p>Formula & code sheets</p>
                 </div>
               </Link>
 
-              <Link to="/analytics" className="quick-tool-card">
-                <div className="tool-icon icon-rose"><TrendingUp size={20} /></div>
+              <Link to="/faculty" className="quick-tool-card">
+                <div className="tool-icon icon-rose"><Users size={20} /></div>
                 <div>
-                  <strong>Analytics</strong>
-                  <p>Review workload trends</p>
+                  <strong>Faculty Directory</strong>
+                  <p>Prof. Somesh Chutel & staff</p>
                 </div>
               </Link>
 
-              <Link to="/profile" className="quick-tool-card">
-                <div className="tool-icon icon-cyan"><Award size={20} /></div>
+              <Link to="/syllabus" className="quick-tool-card">
+                <div className="tool-icon icon-cyan"><FileText size={20} /></div>
                 <div>
-                  <strong>Student ID Card</strong>
-                  <p>View verified credentials</p>
+                  <strong>Course Syllabus</strong>
+                  <p>Units & question banks</p>
                 </div>
               </Link>
             </div>
@@ -282,3 +301,4 @@ export default function Dashboard() {
     </div>
   );
 }
+

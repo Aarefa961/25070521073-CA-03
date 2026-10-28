@@ -9,6 +9,11 @@ import {
   Calculator,
   BookOpen,
   BarChart3,
+  CalendarCheck,
+  Users,
+  FileText,
+  Clock,
+  Sparkles,
   User,
   LogOut,
   LogIn,
@@ -16,11 +21,13 @@ import {
   Menu,
   X,
   Zap,
+  ChevronDown,
 } from 'lucide-react';
 
 export default function Navbar() {
   const { user, isAuthenticated, logout, loginDemo } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -33,7 +40,10 @@ export default function Navbar() {
     navigate('/dashboard');
   };
 
-  const closeMenu = () => setMobileMenuOpen(false);
+  const closeMenu = () => {
+    setMobileMenuOpen(false);
+    setMoreDropdownOpen(false);
+  };
 
   return (
     <header className="site-header">
@@ -58,30 +68,106 @@ export default function Navbar() {
           {isAuthenticated && (
             <>
               <NavLink to="/dashboard" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-                <LayoutDashboard size={16} />
+                <LayoutDashboard size={15} />
                 <span>Dashboard</span>
               </NavLink>
               <NavLink to="/tasks" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-                <CheckSquare size={16} />
+                <CheckSquare size={15} />
                 <span>Tasks</span>
               </NavLink>
+              <NavLink to="/attendance" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                <CalendarCheck size={15} />
+                <span>Attendance</span>
+              </NavLink>
               <NavLink to="/timetable" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-                <Calendar size={16} />
+                <Calendar size={15} />
                 <span>Timetable</span>
               </NavLink>
               <NavLink to="/gpa-calculator" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-                <Calculator size={16} />
+                <Calculator size={15} />
                 <span>GPA Calc</span>
               </NavLink>
               <NavLink to="/notes" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-                <BookOpen size={16} />
+                <BookOpen size={15} />
                 <span>Notes</span>
               </NavLink>
               <NavLink to="/analytics" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-                <BarChart3 size={16} />
+                <BarChart3 size={15} />
                 <span>Analytics</span>
               </NavLink>
+
+              {/* Academic More Modules Dropdown */}
+              <div
+                className="nav-dropdown-wrapper"
+                onMouseEnter={() => setMoreDropdownOpen(true)}
+                onMouseLeave={() => setMoreDropdownOpen(false)}
+              >
+                <button
+                  type="button"
+                  className={`nav-item dropdown-toggle-btn ${moreDropdownOpen ? 'active' : ''}`}
+                  onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
+                >
+                  <Sparkles size={14} className="text-amber" />
+                  <span>Academic +</span>
+                  <ChevronDown size={14} />
+                </button>
+
+                {moreDropdownOpen && (
+                  <div className="nav-dropdown-menu">
+                    <NavLink
+                      to="/faculty"
+                      className="nav-dropdown-item"
+                      onClick={() => setMoreDropdownOpen(false)}
+                    >
+                      <Users size={16} className="text-purple" />
+                      <div>
+                        <strong>Faculty Directory</strong>
+                        <p>Office hours & consultation</p>
+                      </div>
+                    </NavLink>
+                    <NavLink
+                      to="/syllabus"
+                      className="nav-dropdown-item"
+                      onClick={() => setMoreDropdownOpen(false)}
+                    >
+                      <FileText size={16} className="text-rose" />
+                      <div>
+                        <strong>Course Syllabus</strong>
+                        <p>Units & question bank</p>
+                      </div>
+                    </NavLink>
+                    <NavLink
+                      to="/exam-schedule"
+                      className="nav-dropdown-item"
+                      onClick={() => setMoreDropdownOpen(false)}
+                    >
+                      <Clock size={16} className="text-indigo" />
+                      <div>
+                        <strong>Exam Schedule</strong>
+                        <p>Continuous assessment dates</p>
+                      </div>
+                    </NavLink>
+                    <NavLink
+                      to="/services"
+                      className="nav-dropdown-item"
+                      onClick={() => setMoreDropdownOpen(false)}
+                    >
+                      <Sparkles size={16} className="text-emerald" />
+                      <div>
+                        <strong>Services Hub</strong>
+                        <p>All 10 academic services</p>
+                      </div>
+                    </NavLink>
+                  </div>
+                )}
+              </div>
             </>
+          )}
+
+          {!isAuthenticated && (
+            <NavLink to="/services" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+              Services
+            </NavLink>
           )}
           <NavLink to="/about" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
             About
@@ -98,7 +184,7 @@ export default function Navbar() {
               <Link to="/profile" className="user-pill-btn" title="View Profile">
                 <span className="user-avatar">{user?.avatar || '🎓'}</span>
                 <div className="user-pill-info">
-                  <span className="user-name-short">{user?.name?.split(' ')[0] || 'Student'}</span>
+                  <span className="user-name-short">{user?.name?.split(' ')[0] || 'AAREFA'}</span>
                   <span className="user-prn-pill">{user?.prn ? `PRN: ${user.prn}` : 'Student'}</span>
                 </div>
               </Link>
@@ -111,7 +197,7 @@ export default function Navbar() {
             <div className="guest-actions">
               <button onClick={handleDemoClick} className="btn-demo-quick" title="One-Click Evaluation Login">
                 <Zap size={14} />
-                <span>1-Click Demo</span>
+                <span>⚡ 1-Click Demo</span>
               </button>
               <Link to="/login" className="btn-login-link">
                 <LogIn size={15} />
@@ -149,6 +235,9 @@ export default function Navbar() {
               <NavLink to="/tasks" className="mobile-nav-item" onClick={closeMenu}>
                 <CheckSquare size={18} /> Tasks & Assignments
               </NavLink>
+              <NavLink to="/attendance" className="mobile-nav-item" onClick={closeMenu}>
+                <CalendarCheck size={18} /> Attendance Tracker
+              </NavLink>
               <NavLink to="/timetable" className="mobile-nav-item" onClick={closeMenu}>
                 <Calendar size={18} /> Weekly Timetable
               </NavLink>
@@ -161,6 +250,18 @@ export default function Navbar() {
               <NavLink to="/analytics" className="mobile-nav-item" onClick={closeMenu}>
                 <BarChart3 size={18} /> Analytics & Performance
               </NavLink>
+              <NavLink to="/faculty" className="mobile-nav-item" onClick={closeMenu}>
+                <Users size={18} /> Faculty Directory
+              </NavLink>
+              <NavLink to="/syllabus" className="mobile-nav-item" onClick={closeMenu}>
+                <FileText size={18} /> Course Syllabus & Qs
+              </NavLink>
+              <NavLink to="/exam-schedule" className="mobile-nav-item" onClick={closeMenu}>
+                <Clock size={18} /> Exam & Assessment Schedule
+              </NavLink>
+              <NavLink to="/services" className="mobile-nav-item" onClick={closeMenu}>
+                <Sparkles size={18} /> Academic Services
+              </NavLink>
               <NavLink to="/profile" className="mobile-nav-item" onClick={closeMenu}>
                 <User size={18} /> My Student Profile
               </NavLink>
@@ -171,7 +272,7 @@ export default function Navbar() {
                 }}
                 className="mobile-nav-item logout-btn-mobile"
               >
-                <LogOut size={18} /> Log Out ({user?.name})
+                <LogOut size={18} /> Log Out ({user?.name || 'Student'})
               </button>
             </>
           ) : (

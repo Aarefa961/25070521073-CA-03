@@ -23,7 +23,7 @@ export default function About() {
     { method: 'PATCH', endpoint: '/api/tasks/:id', alias: '/update/:id', desc: 'Updates task fields or toggles completion status' },
     { method: 'DELETE', endpoint: '/api/tasks/:id', alias: '/delete/:id', desc: 'Deletes a task record from MongoDB' },
     { method: 'GET', endpoint: '/api/notes', alias: '—', desc: 'Lists study notes and formula cheat sheets' },
-    { method: 'GET', endpoint: '/api/health', alias: '—', desc: 'Server and MongoDB Atlas connection status probe' },
+    { method: 'GET', endpoint: '/api/health', alias: '—', desc: 'Server and MongoDB (Community / Compass) connection status probe' },
   ];
 
   return (
@@ -42,7 +42,7 @@ export default function About() {
         <div className="about-meta-grid">
           <div className="meta-card">
             <span className="meta-label">Student Name:</span>
-            <strong>Aarefa</strong>
+            <strong>AAREFA AADIL</strong>
           </div>
           <div className="meta-card">
             <span className="meta-label">PRN / Roll Number:</span>
@@ -50,11 +50,46 @@ export default function About() {
           </div>
           <div className="meta-card">
             <span className="meta-label">Course Evaluation:</span>
-            <strong>Continuous Assessment 03</strong>
+            <strong>Continuous Assessment 03 (CA-03)</strong>
           </div>
           <div className="meta-card">
-            <span className="meta-label">Faculty Mentor:</span>
+            <span className="meta-label">Faculty Mentor & Guide:</span>
             <strong>Prof. Somesh Chutel</strong>
+          </div>
+        </div>
+      </section>
+
+      {/* Developer Profile Spotlight */}
+      <section className="about-section-panel mt-4">
+        <div className="developer-spotlight-box">
+          <div className="dev-avatar-wrap">
+            <span className="dev-avatar-icon">🎓</span>
+            <span className="dev-status-badge">Developer & Project Lead</span>
+          </div>
+          <div className="dev-details-wrap">
+            <h2 className="dev-name">AAREFA AADIL</h2>
+            <p className="dev-subtitle">B.Tech Computer Science & Engineering • PRN: 25070521073</p>
+            <p className="dev-bio">
+              Engineered this full-stack academic management solution for Continuous Assessment CA-03 under the supervision of <strong>Prof. Somesh Chutel</strong>. Built strictly following the required decoupled client-server architecture, JSON Web Token (JWT) stateless authentication, Bcrypt password hashing, MongoDB database persistence, and comprehensive university workflow modules.
+            </p>
+            <div className="dev-stats-row">
+              <div className="dev-stat-item">
+                <span className="dev-stat-num">25070521073</span>
+                <span className="dev-stat-lbl">Student PRN</span>
+              </div>
+              <div className="dev-stat-item">
+                <span className="dev-stat-num">Section B</span>
+                <span className="dev-stat-lbl">Batch / Class</span>
+              </div>
+              <div className="dev-stat-item">
+                <span className="dev-stat-num">CA-03</span>
+                <span className="dev-stat-lbl">Assessment</span>
+              </div>
+              <div className="dev-stat-item">
+                <span className="dev-stat-num">MERN + Vite</span>
+                <span className="dev-stat-lbl">Tech Stack</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -169,11 +204,27 @@ export default function About() {
           </div>
           <div className="module-check-item">
             <CheckCircle2 size={18} className="text-emerald" />
+            <span><strong>Attendance Forecaster:</strong> 75% eligibility simulation and safe lecture bunk calculator</span>
+          </div>
+          <div className="module-check-item">
+            <CheckCircle2 size={18} className="text-emerald" />
             <span><strong>Timetable Planner:</strong> Daily lecture schedule with professors, rooms & lab timings</span>
           </div>
           <div className="module-check-item">
             <CheckCircle2 size={18} className="text-emerald" />
             <span><strong>GPA / CGPA Engine:</strong> UGC 10-point scale grade prediction with credits calculation</span>
+          </div>
+          <div className="module-check-item">
+            <CheckCircle2 size={18} className="text-emerald" />
+            <span><strong>Faculty Directory:</strong> Cabin office hours, prof profiles & consultation booking</span>
+          </div>
+          <div className="module-check-item">
+            <CheckCircle2 size={18} className="text-emerald" />
+            <span><strong>Curriculum & Questions:</strong> Unit-wise syllabus breakdown and previous assessment papers</span>
+          </div>
+          <div className="module-check-item">
+            <CheckCircle2 size={18} className="text-emerald" />
+            <span><strong>Exam & Assessment Timetable:</strong> Real-time countdown clocks and exam guidelines</span>
           </div>
           <div className="module-check-item">
             <CheckCircle2 size={18} className="text-emerald" />

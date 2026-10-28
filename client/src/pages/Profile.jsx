@@ -54,8 +54,8 @@ export default function Profile() {
               </div>
 
               <div className="id-card-info-table">
-                <h2 className="id-student-name">{user?.name || 'Aarefa'}</h2>
-                <span className="id-student-role">{user?.status || 'Student'} • Section B</span>
+                <h2 className="id-student-name">{user?.name || 'AAREFA AADIL'}</h2>
+                <span className="id-student-role">{user?.status || 'Student'} • Section B (sitSecB)</span>
 
                 <div className="id-data-rows">
                   <div className="id-row">
@@ -72,7 +72,7 @@ export default function Profile() {
                   </div>
                   <div className="id-row">
                     <span className="id-label">Email:</span>
-                    <strong className="id-value">{user?.email || 'student@sit.edu'}</strong>
+                    <strong className="id-value">{user?.email || 'aarefa.aadil@sitpune.edu.in'}</strong>
                   </div>
                 </div>
               </div>
