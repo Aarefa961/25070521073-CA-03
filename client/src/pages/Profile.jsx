@@ -60,7 +60,7 @@ export default function Profile() {
                 <div className="id-data-rows">
                   <div className="id-row">
                     <span className="id-label">PRN / Roll No:</span>
-                    <strong className="id-value text-indigo">{user?.prn || '25070521060'}</strong>
+                    <strong className="id-value text-indigo">{user?.prn || '25070521073'}</strong>
                   </div>
                   <div className="id-row">
                     <span className="id-label">Department:</span>

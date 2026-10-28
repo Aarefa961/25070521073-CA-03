@@ -46,7 +46,7 @@ export default function About() {
           </div>
           <div className="meta-card">
             <span className="meta-label">PRN / Roll Number:</span>
-            <strong className="text-indigo">25070521060</strong>
+            <strong className="text-indigo">25070521073</strong>
           </div>
           <div className="meta-card">
             <span className="meta-label">Course Evaluation:</span>

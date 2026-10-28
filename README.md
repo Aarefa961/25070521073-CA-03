@@ -5,7 +5,7 @@
 **Institute:** Symbiosis Institute of Technology (SIT), Pune  
 **Batch / Section:** Section B (`sitSecB`)  
 **Student Name:** Aarefa  
-**PRN / Roll Number:** 25070521060  
+**PRN / Roll Number:** 25070521073  
 **Faculty Evaluator & Guide:** Prof. Somesh Chutel  
 **Reference Format Repository:** [somesh-chutel/25070521060-CA-03](https://github.com/somesh-chutel/25070521060-CA-03)
 
@@ -80,7 +80,7 @@ The application implements a secure authentication flow:
 1. **Password Hashing:** Upon registration (`/create` or `/api/auth/register`), student passwords are encrypted with `bcryptjs` using 10 salt rounds before persisting to MongoDB.
 2. **Stateless JWT Tokens:** Upon successful login (`/login` or `/api/auth/login`), the server issues a signed JSON Web Token using `jsonwebtoken` signed with `MY_SECRET_TOKEN` (matching the professor's sample configuration).
 3. **Protected Routes:** Frontend pages (`/dashboard`, `/tasks`, `/timetable`, `/gpa-calculator`, `/notes`, `/analytics`, `/profile`) are protected using `<ProtectedRoute>`. Unauthenticated requests redirect to `/login`.
-4. **1-Click Demo Evaluation:** For instant grading without registering, click the **"⚡ 1-Click Demo"** button on the Navbar or Login page to automatically authenticate as **Aarefa (PRN: 25070521060)**.
+4. **1-Click Demo Evaluation:** For instant grading without registering, click the **"⚡ 1-Click Demo"** button on the Navbar or Login page to automatically authenticate as **Aarefa (PRN: 25070521073)**.
 
 ---
 

@@ -41,7 +41,7 @@ export default function Footer() {
             <h4 className="footer-heading">Project Submission</h4>
             <ul className="footer-info-list">
               <li><strong>Student Name:</strong> Aarefa</li>
-              <li><strong>PRN / Roll No:</strong> 25070521060</li>
+              <li><strong>PRN / Roll No:</strong> 25070521073</li>
               <li><strong>Course:</strong> Web Technologies / Full-Stack</li>
               <li><strong>Evaluation:</strong> Continuous Assessment 03</li>
               <li><strong>Faculty Guide:</strong> Prof. Somesh Chutel</li>

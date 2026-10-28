@@ -27,7 +27,7 @@ export default function Contact() {
     },
     {
       q: 'Can the professor evaluate the application in 1-click?',
-      a: 'Yes, click the "⚡ 1-Click Demo" button on the Navbar or Login page. It automatically logs in with the preloaded student profile (Aarefa, PRN: 25070521060).',
+      a: 'Yes, click the "⚡ 1-Click Demo" button on the Navbar or Login page. It automatically logs in with the preloaded student profile (Aarefa, PRN: 25070521073).',
     },
     {
       q: 'How does the SGPA / CGPA calculator calculate scores?',
@@ -79,7 +79,7 @@ export default function Contact() {
                   <label className="field-label">PRN / Roll Number</label>
                   <input
                     type="text"
-                    placeholder="e.g. 25070521060"
+                    placeholder="e.g. 25070521073"
                     value={formData.prn}
                     onChange={(e) => setFormData({ ...formData, prn: e.target.value })}
                     className="text-input"

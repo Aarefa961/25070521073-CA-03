@@ -85,7 +85,7 @@ export function AuthProvider({ children }) {
       id: 'demo-student-id-sit',
       name: 'Aarefa (Demo Student)',
       email: 'aarefa.student@sit.edu',
-      prn: '25070521060',
+      prn: '25070521073',
       department: 'Computer Science & Engineering',
       semester: '5th Semester',
       status: 'Student',

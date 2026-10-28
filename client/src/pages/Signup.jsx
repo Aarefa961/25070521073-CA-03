@@ -110,7 +110,7 @@ export default function Signup() {
               <input
                 type="text"
                 name="prn"
-                placeholder="e.g. 25070521060"
+                placeholder="e.g. 25070521073"
                 value={formData.prn}
                 onChange={handleChange}
                 className="text-input"
